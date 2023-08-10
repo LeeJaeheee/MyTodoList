@@ -7,54 +7,60 @@
 
 import UIKit
 
-class TodoListTableViewController: UITableViewController, UITextFieldDelegate {
+class TodoListTableViewController: UITableViewController {
     
     var titleTextField: UITextField!
     var dueDateTextField: UITextField!
     var timeTextField: UITextField!
     
+    var uniqueDueDates: [Date] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        uniqueDueDates = Array(Set(TaskList.list.map { $0.dueDate })).sorted()
     }
     
     // MARK: - Table view data source
     
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        let uniqueDueDates = Set(TaskList.list.map { $0.dueDate })
-//        return uniqueDueDates.count
-//    }
-//    
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        let uniqueDueDates = Array(Set(TaskList.list.map { $0.dueDate }))
-//        let tasksForSection = TaskList.list.filter { $0.dueDate == uniqueDueDates[section] }
-//        return tasksForSection.count
-//    }
-//
-//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        let uniqueDueDates = Array(Set(TaskList.list.map { $0.dueDate }))
-//        let dateFormatter = DateFormatter.dateFormatter
-//        return dateFormatter.string(from: uniqueDueDates[section])
-//    }
-//
-//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-//
-//        let uniqueDueDates = Array(Set(TaskList.list.map { $0.dueDate }))
-//        let tasksForSection = TaskList.list.filter { $0.dueDate == uniqueDueDates[indexPath.section] }
-//        let task = tasksForSection[indexPath.row]
-//
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "TodoListTableViewCell", for: indexPath) as! TodoListTableViewCell
-//        let dates = Array(viewModel.groupedTodos.keys.sorted())
-//        let date = dates[indexPath.section]
-//        if let todo = viewModel.groupedTodos[date]?[indexPath.item] {
-//            cell.configure(todo)
-//        }
-//
-//        return cell
-//    }
-//
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return uniqueDueDates.count
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let tasksForSection = TaskList.list.filter { $0.dueDate == uniqueDueDates[section] }
+        return tasksForSection.count
+    }
+
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return DateFormatter.dateFormatter.string(from: uniqueDueDates[section])
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TodoListTableViewCell", for: indexPath) as! TodoListTableViewCell
+        
+        let tasksForSection = TaskList.list.filter { $0.dueDate == uniqueDueDates[indexPath.section] }.sorted(by: { $0.time < $1.time })
+        let task = tasksForSection[indexPath.row]
+        
+        cell.task = task
+        cell.configure(_task: task)
+        
+        return cell
+    }
     
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+
+            let tasksForSection = TaskList.list.filter { $0.dueDate == uniqueDueDates[indexPath.section] }.sorted(by: { $0.time < $1.time })
+            let task = tasksForSection[indexPath.row]
+            
+            TaskList.deleteTask(id: task.id)
+            
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+
+    // TODO: alert창 dueDateTextField와 timeTextField에 기본값 오늘 날짜로 설정, 오늘 이후 날짜만 선택할 수 있도록 유효성 검증 로직 추가
     @IBAction func addTaskButtonTapped(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: "Add Task", message: nil, preferredStyle: .alert)
         
@@ -86,7 +92,8 @@ class TodoListTableViewController: UITableViewController, UITextFieldDelegate {
                let time = DateFormatter.timeFormatter.date(from: timeString),
                !title.isEmpty, !dueDateString.isEmpty, !timeString.isEmpty {
                 TaskList.list.append(Task(title: title, dueDate: dueDate, time: time))
-                print(TaskList.list)
+                uniqueDueDates = Array(Set(TaskList.list.map { $0.dueDate })).sorted()
+                tableView.reloadData()
             } else {
                 self.showInvalidInputAlert()
             }
@@ -100,6 +107,18 @@ class TodoListTableViewController: UITableViewController, UITextFieldDelegate {
         present(alertController, animated: true, completion: nil)
     }
     
+    func showInvalidInputAlert() {
+        let alert = UIAlertController(title: "Invalid Input", message: "Please fill in all fields correctly.", preferredStyle: .alert)
+        let okayAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okayAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    
+}
+
+extension TodoListTableViewController: UITextFieldDelegate {
+    // FIXME: 유효하지 않으면 FirstResponder 넘어가지 않도록 수정
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == titleTextField {
             if let text = textField.text {
@@ -140,18 +159,10 @@ class TodoListTableViewController: UITableViewController, UITextFieldDelegate {
         }
     }
     
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        textField.resignFirstResponder()
-//        return true
-//    }
-    
-    func showInvalidInputAlert() {
-        let alert = UIAlertController(title: "Invalid Input", message: "Please fill in all fields correctly.", preferredStyle: .alert)
-        let okayAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alert.addAction(okayAction)
-        present(alert, animated: true, completion: nil)
-    }
-    
+    //    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    //        textField.resignFirstResponder()
+    //        return true
+    //    }
     
 }
 

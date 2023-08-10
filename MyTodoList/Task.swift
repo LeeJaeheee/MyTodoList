@@ -7,9 +7,12 @@
 
 import Foundation
 
+let imageNames = ["Image 2", "Image 4", "Image 5", "Image 6", "Image 7"]
+
 struct Task {
-    var id = UUID()
+    let id = UUID()
     var title: String
+    var image = imageNames.randomElement()
     var isDone = false
     var dueDate: Date
     var time: Date

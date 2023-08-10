@@ -8,7 +8,23 @@
 import UIKit
 
 class TodoListTableViewCell: UITableViewCell {
-
+    
+    @IBOutlet weak var todoImage: UIImageView!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var doneSwitch: UISwitch!
+    
+    var task: Task?
+    
+    func configure(_task: Task) {
+        let task = _task
+        todoImage.image = UIImage(named: task.image!)
+        todoImage.circleImage = true
+        timeLabel.text = DateFormatter.timeFormatter.string(from: task.time)
+        titleLabel.setTextWithStrikethrough(task.title, isDone: task.isDone)
+        doneSwitch.isOn = task.isDone
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -19,5 +35,12 @@ class TodoListTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    @IBAction func switchChanged(_ sender: UISwitch) {
+        guard let task = task else { return }
+        TaskList.updateIsDone(id: task.id, isDone: sender.isOn)
+        titleLabel.setTextWithStrikethrough(task.title, isDone: sender.isOn)
+    }
+    
 
 }
