@@ -36,29 +36,33 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image 3" translatesAutoresizingMaskIntoConstraints="NO" id="O1g-hS-syG">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ei5-cj-w5a">
-                                <rect key="frame" x="96.666666666666686" y="173" width="200" height="90"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="ei5-cj-w5a">
+                                <rect key="frame" x="81.666666666666686" y="173" width="230" height="100"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Go9-hN-tsB">
-                                        <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                        <color key="backgroundColor" white="1" alpha="0.84892384105960261" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Go9-hN-tsB" secondAttribute="height" multiplier="1:1" id="03P-AC-0W9"/>
-                                            <constraint firstAttribute="width" constant="90" id="BgJ-6T-2XH"/>
+                                            <constraint firstAttribute="width" constant="100" id="BgJ-6T-2XH"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="TODO"/>
+                                        <state key="normal" title="TODO">
+                                            <color key="titleColor" systemColor="systemRedColor"/>
+                                        </state>
                                         <connections>
                                             <segue destination="EFn-k0-r2K" kind="show" id="Lah-fW-qKX"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sja-Bp-ppg">
-                                        <rect key="frame" x="110" y="0.0" width="90" height="90"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <rect key="frame" x="130" y="0.0" width="100" height="100"/>
+                                        <color key="backgroundColor" white="1" alpha="0.84892384109999997" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="DONE"/>
+                                        <state key="normal" title="DONE">
+                                            <color key="titleColor" systemColor="systemGreenColor"/>
+                                        </state>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -75,21 +79,25 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="j6e-N1-4VD"/>
+                    <connections>
+                        <outlet property="doneButton" destination="sja-Bp-ppg" id="xfO-n9-5hJ"/>
+                        <outlet property="todoButton" destination="Go9-hN-tsB" id="5bf-3X-3RQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QqY-6s-bEg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-498.47328244274809" y="-40.140845070422536"/>
         </scene>
-        <!--TODO-->
+        <!--TODO LIST-->
         <scene sceneID="jue-gw-B4Y">
             <objects>
-                <tableViewController id="EFn-k0-r2K" sceneMemberID="viewController">
+                <tableViewController id="EFn-k0-r2K" customClass="TodoListTableViewController" customModule="MyTodoList" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="F0n-10-PCN">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="80" id="6MG-MY-ycW">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="todoTableViewCell" rowHeight="80" id="6MG-MY-ycW">
                                 <rect key="frame" x="20" y="55.333332061767578" width="353" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6MG-MY-ycW" id="W9Q-kN-2GT">
@@ -148,9 +156,12 @@
                             <outlet property="delegate" destination="EFn-k0-r2K" id="ghJ-jF-9GN"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="TODO" id="McO-Ns-8je">
+                    <navigationItem key="navigationItem" title="TODO LIST" id="McO-Ns-8je">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="square.and.pencil" catalog="system" id="bhE-X7-gWW">
                             <inset key="imageInsets" minX="0.0" minY="0.0" maxX="3" maxY="0.0"/>
+                            <connections>
+                                <action selector="addTaskButtonTapped:" destination="EFn-k0-r2K" id="I96-vL-arM"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
@@ -164,6 +175,12 @@
         <image name="square.and.pencil" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

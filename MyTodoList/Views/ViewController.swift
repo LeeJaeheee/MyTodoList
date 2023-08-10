@@ -9,9 +9,15 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var todoButton: UIButton!
+    @IBOutlet weak var doneButton: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        todoButton.circleButton = true
+        doneButton.circleButton = true
     }
 
 
