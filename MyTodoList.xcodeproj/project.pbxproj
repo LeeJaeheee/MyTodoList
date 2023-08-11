@@ -23,6 +23,8 @@
 		D2D308E12A857303002894C5 /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D308E02A857303002894C5 /* UILabelExtension.swift */; };
 		D2D308E32A857599002894C5 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D308E22A857599002894C5 /* UIImageViewExtension.swift */; };
 		D2D308E52A858F67002894C5 /* DoneListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D308E42A858F67002894C5 /* DoneListTableViewController.swift */; };
+		D2D308E72A85AFFA002894C5 /* TodoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D308E62A85AFFA002894C5 /* TodoDetailViewController.swift */; };
+		D2D308E92A85B223002894C5 /* CalendarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D308E82A85B223002894C5 /* CalendarExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		D2D308E02A857303002894C5 /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 		D2D308E22A857599002894C5 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		D2D308E42A858F67002894C5 /* DoneListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneListTableViewController.swift; sourceTree = "<group>"; };
+		D2D308E62A85AFFA002894C5 /* TodoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailViewController.swift; sourceTree = "<group>"; };
+		D2D308E82A85B223002894C5 /* CalendarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,7 @@
 				D2D308DC2A854ED4002894C5 /* UITextFieldExtension.swift */,
 				D2D308E02A857303002894C5 /* UILabelExtension.swift */,
 				D2D308E22A857599002894C5 /* UIImageViewExtension.swift */,
+				D2D308E82A85B223002894C5 /* CalendarExtension.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -108,6 +113,7 @@
 				D2D308BA2A851C83002894C5 /* ViewController.swift */,
 				D2D308D82A8533BD002894C5 /* TodoListTableViewController.swift */,
 				D2D308E42A858F67002894C5 /* DoneListTableViewController.swift */,
+				D2D308E62A85AFFA002894C5 /* TodoDetailViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -213,6 +219,8 @@
 				D2D308B72A851C83002894C5 /* AppDelegate.swift in Sources */,
 				D2D308B92A851C83002894C5 /* SceneDelegate.swift in Sources */,
 				D2D308D92A8533BD002894C5 /* TodoListTableViewController.swift in Sources */,
+				D2D308E72A85AFFA002894C5 /* TodoDetailViewController.swift in Sources */,
+				D2D308E92A85B223002894C5 /* CalendarExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

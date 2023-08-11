@@ -21,6 +21,21 @@ class TodoListTableViewController: UITableViewController {
         uniqueDueDates = Array(Set(TaskList.list.map { $0.dueDate })).sorted()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        uniqueDueDates = Array(Set(TaskList.list.map { $0.dueDate })).sorted()
+        tableView.reloadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toDetailVC" {
+            let vc = segue.destination as! TodoDetailViewController
+            if let indexPath = tableView.indexPathForSelectedRow {
+                vc.selectedTask = TaskList.list.filter { $0.dueDate == uniqueDueDates[indexPath.section] }.sorted(by: { $0.time < $1.time })[indexPath.row]
+            }
+        }
+    }
+    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -48,6 +63,7 @@ class TodoListTableViewController: UITableViewController {
         return cell
     }
     
+    // TODO: "정말 삭제하시겠습니까?" 확인창 추가하기
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
 

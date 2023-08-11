@@ -30,8 +30,13 @@ struct TaskList {
         }
     }
     
-    static func updateTask(task: Task) {
-
+    static func updateTask(id: UUID, title: String, date: Date) {
+        if let i = list.firstIndex(where: {$0.id == id}) {
+            list[i].title = title
+            let (dateOnly, timeOnly) = Calendar.current.splitDateAndTime(from: date)
+            list[i].dueDate = dateOnly
+            list[i].time = timeOnly
+        }
     }
     
     static func deleteTask(id: UUID) {

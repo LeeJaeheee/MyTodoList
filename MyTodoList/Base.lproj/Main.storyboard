@@ -162,6 +162,7 @@
                                     <outlet property="timeLabel" destination="6jK-Yl-fyx" id="eyV-Cv-0hz"/>
                                     <outlet property="titleLabel" destination="AuP-g3-9tc" id="f96-EP-YWh"/>
                                     <outlet property="todoImage" destination="oYx-g2-b8K" id="vIW-9N-AqO"/>
+                                    <segue destination="Hfj-MU-sGH" kind="show" identifier="toDetailVC" id="0bp-Ab-d3T"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -182,6 +183,85 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cSb-YL-pa8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="520" y="-295"/>
+        </scene>
+        <!--Todo Detail View Controller-->
+        <scene sceneID="4gi-LL-inQ">
+            <objects>
+                <viewController id="Hfj-MU-sGH" customClass="TodoDetailViewController" customModule="MyTodoList" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SKQ-MU-JBY">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image 2" translatesAutoresizingMaskIntoConstraints="NO" id="r14-VF-Dcg">
+                                <rect key="frame" x="76.666666666666686" y="168" width="240" height="240"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="KbL-XF-MPy"/>
+                                    <constraint firstAttribute="width" secondItem="r14-VF-Dcg" secondAttribute="height" multiplier="1:1" id="SXp-rO-6AR"/>
+                                </constraints>
+                            </imageView>
+                            <datePicker contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="H9h-gr-x3w">
+                                <rect key="frame" x="81.666666666666686" y="468" width="230" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="CVt-iC-rjO"/>
+                                    <constraint firstAttribute="width" constant="230" id="J0l-7M-y7S"/>
+                                </constraints>
+                                <locale key="locale" localeIdentifier="ko_KR"/>
+                            </datePicker>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Todo" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lsE-53-6un">
+                                <rect key="frame" x="81.666666666666686" y="528" width="230" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="hqy-Zy-owx"/>
+                                    <constraint firstAttribute="width" constant="230" id="p3W-J7-3b2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n9W-8c-Kmp">
+                                <rect key="frame" x="81.666666666666686" y="613" width="230" height="36"/>
+                                <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="230" id="9LQ-Pe-23S"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="수정하기">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="updateButtonTapped:" destination="Hfj-MU-sGH" eventType="touchUpInside" id="zw6-WH-f6Y"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="wi9-kc-Waw"/>
+                        <color key="backgroundColor" red="0.84905564629999997" green="0.92564246250000004" blue="0.98039215800000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="lsE-53-6un" firstAttribute="centerX" secondItem="H9h-gr-x3w" secondAttribute="centerX" id="74l-uT-Uye"/>
+                            <constraint firstItem="H9h-gr-x3w" firstAttribute="centerX" secondItem="SKQ-MU-JBY" secondAttribute="centerX" id="Cq4-zi-WEF"/>
+                            <constraint firstItem="n9W-8c-Kmp" firstAttribute="centerX" secondItem="lsE-53-6un" secondAttribute="centerX" id="TbI-F1-4Ky"/>
+                            <constraint firstItem="H9h-gr-x3w" firstAttribute="top" secondItem="r14-VF-Dcg" secondAttribute="bottom" constant="60" id="cWt-t8-znW"/>
+                            <constraint firstItem="n9W-8c-Kmp" firstAttribute="top" secondItem="lsE-53-6un" secondAttribute="bottom" constant="50" id="g95-51-T5K"/>
+                            <constraint firstItem="lsE-53-6un" firstAttribute="top" secondItem="H9h-gr-x3w" secondAttribute="bottom" constant="20" id="iEX-Ev-V6I"/>
+                            <constraint firstItem="r14-VF-Dcg" firstAttribute="top" secondItem="wi9-kc-Waw" secondAttribute="top" constant="65" id="q90-3d-LFF"/>
+                            <constraint firstItem="r14-VF-Dcg" firstAttribute="centerX" secondItem="SKQ-MU-JBY" secondAttribute="centerX" id="rke-sk-fz8"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="V4n-Jr-q8k">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="trash" catalog="system" id="5go-ab-ciq">
+                            <inset key="imageInsets" minX="0.0" minY="0.0" maxX="3" maxY="0.0"/>
+                            <connections>
+                                <action selector="deleteButtonTapped:" destination="Hfj-MU-sGH" id="FiZ-ep-r1D"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="todoDatePicker" destination="H9h-gr-x3w" id="4Qz-ex-jNf"/>
+                        <outlet property="todoImage" destination="r14-VF-Dcg" id="jkW-8f-YFq"/>
+                        <outlet property="todoTextField" destination="lsE-53-6un" id="kJR-oX-gTS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="auC-n7-Uax" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1498" y="-295"/>
         </scene>
         <!--DONE LIST-->
         <scene sceneID="agW-zH-PUI">
@@ -273,8 +353,12 @@
         <image name="Image 2" width="224.66667175292969" height="399.33334350585938"/>
         <image name="Image 3" width="224.66667175292969" height="399.33334350585938"/>
         <image name="square.and.pencil" catalog="system" width="128" height="113"/>
+        <image name="trash" catalog="system" width="117" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
